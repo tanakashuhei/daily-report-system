@@ -43,6 +43,7 @@ public interface JpaConst {
     //Entity名
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
+    String ENTITY_FOLL = "follow";
 
     //JPQL内パラメータ
     String JPQL_PARM_CODE = "code"; //社員番号
@@ -75,4 +76,14 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
+    String Q_FOLL_GET_ALL = ENTITY_FOLL + ".getAll";
+    String Q_FOLL_GET_ALL_DEF = "SELECT f FROM Follow AS f ORDER BY f.id DESC";
+
+    String Q_FOLL_COUNT = ENTITY_FOLL + ".count";
+    String Q_FOLL_COUNT_DEF = "SELECT COUNT(f) FROM Follow AS f";
+
+    String TABLE_FOLL = "followers";
+    String FOLL_COL_ID = "id";
+    String FOLL_COL_FOLLOWING_NAME = "following_name";
+    String FOLL_COL_FOLLOWEW_NAME = "follower_name";
 }

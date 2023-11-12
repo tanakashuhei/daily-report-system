@@ -38,7 +38,7 @@ public abstract class ActionBase {
             String command = request.getParameter(ForwardConst.CMD.getValue());
 
             commandMethod = this.getClass().getDeclaredMethod(command,  new Class[0]);
-            commandMethod.invoke(this, new Object[0]);
+            commandMethod.invoke(this, new Object[0]);//メソッドの実行
         }catch(NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException |NullPointerException e) {
 
