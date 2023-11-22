@@ -2,14 +2,17 @@
 <%@ taglib prefix= "c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix= "fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import = "constants.ForwardConst" %>
+<%@ page import= "constants.AttributeConst" %>
 
 <c:set var = "actTop" value = "${ForwardConst.ACT_TOP.getValue()}" />
 <c:set var = "actEmp" value = "${ForwardConst.ACT_EMP.getValue()}" />
 <c:set var = "actRep" value = "${ForwardConst.ACT_REP.getValue()}" />
+<c:set var = "actFoll" value= "${ForwardConst.ACT_FOLL.getValue()}"/>
 
 <c:set var = "commShow" value= "${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var = "commIdx" value = "${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var = "commNew" value = "${ForwardConst.CMD_NEW.getValue()}" />
+<c:set var = "commCrt" value = "${ForwardConst.CMD_CREATE.getValue()}" />
 
 <c:import url= "../layout/app.jsp">
     <c:param name= "content">
@@ -18,8 +21,16 @@
             <c:out value= "${flush}"></c:out>
             </div>
         </c:if>
-        <h2>日報管理システムへようこそ</h2>
-        <h3>【自分の日報　一覧】</h3>
+        <h2><c:out value="${follower_name.name}"/>　の日報倉庫</h2>
+        <c:if test="${follower_name.name != login_employee.name}">
+            <c:if test= "${relations != true}" >
+                <form method= "POST" action="<c:url value= '?action=${actFoll}&command=${commCrt}'/>">
+                    <input type="hidden" name="${AttributeConst.FOLL_ID.getValue()}" value="${follower_name.id}" />
+                    <button type="submit">フォローする</button>
+                </form>
+            </c:if>
+        </c:if>
+        <h3>【日報　一覧】</h3>
         <table id = "report_list">
             <tbody>
                 <tr>
@@ -50,6 +61,5 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href= "<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
     </c:param>
 </c:import>

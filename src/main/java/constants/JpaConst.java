@@ -49,6 +49,8 @@ public interface JpaConst {
     String JPQL_PARM_CODE = "code"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_EMPLOYEE = "employee"; //従業員
+    String JPQL_PARM_FOLLOWING = "following_name";
+    String JPQL_PARM_FOLLOWER = "follower_name";
 
     //NamedQueryの nameとquery
     //全ての従業員をidの降順に取得する
@@ -76,11 +78,17 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
-    String Q_FOLL_GET_ALL = ENTITY_FOLL + ".getAll";
+    String Q_FOLL_GET_ALL = ENTITY_FOLL + ".count";
     String Q_FOLL_GET_ALL_DEF = "SELECT f FROM Follow AS f ORDER BY f.id DESC";
 
-    String Q_FOLL_COUNT = ENTITY_FOLL + ".count";
-    String Q_FOLL_COUNT_DEF = "SELECT COUNT(f) FROM Follow AS f";
+    String Q_FOLL_GET_ALL_MINE = ENTITY_FOLL + ".getAllMine";
+    String Q_FOLL_GET_ALL_MINE_DEF = "SELECT f FROM Follow AS f WHERE f.following_name = :" + JPQL_PARM_FOLLOWING +" ORDER BY f.id DESC";
+
+    String Q_FOLL_COUNT_ALL_MINE = ENTITY_FOLL + ".countAllMine";
+    String Q_FOLL_COUNT_ALL_MINE_DEF = "SELECT COUNT(f) FROM Follow AS f WHERE f.following_name = :" + JPQL_PARM_FOLLOWING;
+
+    String Q_FOLL_FIND_RELATION = ENTITY_FOLL + ".findRelation";
+    String Q_FOLL_FIND_RELATION_DEF = "SELECT f FROM Follow AS f WHERE f.following_name = :" + JPQL_PARM_FOLLOWING + " AND f.follower_name = :" + JPQL_PARM_FOLLOWER;
 
     String TABLE_FOLL = "followers";
     String FOLL_COL_ID = "id";

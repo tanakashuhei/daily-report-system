@@ -20,11 +20,14 @@ import lombok.Setter;
 @Table(name = JpaConst.TABLE_FOLL)
 @NamedQueries({
     @NamedQuery(
-            name = JpaConst.Q_FOLL_GET_ALL,
-            query = JpaConst.Q_FOLL_GET_ALL_DEF),
+            name = JpaConst.Q_FOLL_GET_ALL_MINE,
+            query = JpaConst.Q_FOLL_GET_ALL_MINE_DEF),
     @NamedQuery(
-            name = JpaConst.Q_FOLL_COUNT,
-            query = JpaConst.Q_FOLL_COUNT_DEF)
+            name = JpaConst.Q_FOLL_COUNT_ALL_MINE,
+            query = JpaConst.Q_FOLL_COUNT_ALL_MINE_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_FOLL_FIND_RELATION,
+            query = JpaConst.Q_FOLL_FIND_RELATION_DEF)
 })
 
 @Getter
