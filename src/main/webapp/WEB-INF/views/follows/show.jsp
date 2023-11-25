@@ -21,7 +21,7 @@
             <c:out value= "${flush}"></c:out>
             </div>
         </c:if>
-        <h2><c:out value="${follower_name.name}"/>　の日報倉庫</h2>
+        <h2><c:out value="${follower_name.name}"/>　の個別日報一覧</h2>
         <c:if test="${follower_name.name != login_employee.name}">
             <c:if test= "${relations != true}" >
                 <form method= "POST" action="<c:url value= '?action=${actFoll}&command=${commCrt}'/>">
@@ -58,8 +58,13 @@
                     <c:when test = "${i ==page }">
                         <c:out value= "${i}" />&nbsp;
                     </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value='?action=${actFoll}&command=${commShow}&id=${follower_name.id }&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                    </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
+        <p>
+            <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">日報一覧に戻る</a>&nbsp;
     </c:param>
 </c:import>
