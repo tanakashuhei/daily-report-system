@@ -62,6 +62,18 @@ public abstract class ActionBase {
         }
         response.sendRedirect(redirectUrl);
     }
+    protected void redirect(ForwardConst action, ForwardConst command, String id)
+            throws ServletException, IOException{
+
+        String redirectUrl = request.getContextPath() + "/?action=" + action.getValue();
+        if(command !=null) {
+            redirectUrl = redirectUrl + "&command=" + command.getValue();
+            if(id != null) {
+                redirectUrl = redirectUrl + "&id=" + Integer.parseInt(id);
+            }
+        }
+        response.sendRedirect(redirectUrl);
+    }
     protected boolean checkToken() throws ServletException, IOException{
 
         String _token = getRequestParam(AttributeConst.TOKEN);

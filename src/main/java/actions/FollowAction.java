@@ -29,6 +29,7 @@ public class FollowAction extends ActionBase {
         serviceEmp = new EmployeeService();
 
         invoke();
+        serviceEmp.close();
         serviceRep.close();
         service.close();
 

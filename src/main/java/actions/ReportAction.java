@@ -7,23 +7,28 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import actions.views.EmployeeView;
+import actions.views.IineView;
 import actions.views.ReportView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.IineService;
 import services.ReportService;
 
 public class ReportAction extends ActionBase {
 
     private ReportService service;
+    private IineService serviceIine;
 
     @Override
     public void process() throws ServletException, IOException {
 
         service  = new ReportService();
+        serviceIine = new IineService();
 
         invoke();
+        serviceIine.close();
         service.close();
 
     }
@@ -133,6 +138,16 @@ public class ReportAction extends ActionBase {
 
         //idを条件に日報データを取得する
         ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        long goodcount = serviceIine.getCountAll(rv, 1);
+        long badcount = serviceIine.getCountAll(rv, 0);
+
+        EmployeeView loginEmployee = (EmployeeView)getSessionScope(AttributeConst.LOGIN_EMP);
+        List<IineView> ivs = serviceIine.getAllReport(loginEmployee, rv);
+        IineView iv = null;
+
+        if(ivs.size() != 0 ) {
+            iv = ivs.get(0);
+        }
 
         if (rv == null) {
             //該当の日報データが存在しない場合はエラー画面を表示
@@ -141,6 +156,11 @@ public class ReportAction extends ActionBase {
         } else {
 
             putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
+            putRequestScope(AttributeConst.GOOD_COUNT, goodcount);
+            putRequestScope(AttributeConst.BAD_COUNT, badcount);
+            putRequestScope(AttributeConst.IINE_ID,iv);
+
+            //System.out.println(iv.getPushFlag() + "ここだよ");
 
             //詳細画面を表示
             forward(ForwardConst.FW_REP_SHOW);

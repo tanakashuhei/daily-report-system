@@ -58,7 +58,21 @@ public enum AttributeConst {
     FOLL_ID("id"),
     FOLL_NAME("following_name"),
     FOLL_NAME_ER("follower_name"),
-    FOLL_RELATION("relations");
+    FOLL_RELATION("relations"),
+
+    //いいね
+    IINE("iine"),
+    IINE_ID("id"),
+    IINE_EMP("employee"),
+    IINE_REP("report"),
+    IINE_FLAG("pushFlag"),
+    IINE_INFO("iine_information"),
+
+    FLAG_GOOD(1),
+    FLAG_BAD(0),
+
+    GOOD_COUNT("good_count"),
+    BAD_COUNT("bad_count");
 
 
     private final String text;

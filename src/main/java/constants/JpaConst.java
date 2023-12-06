@@ -44,11 +44,14 @@ public interface JpaConst {
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
     String ENTITY_FOLL = "follow";
+    String ENTITY_IINE = "iine";
 
     //JPQL内パラメータ
     String JPQL_PARM_CODE = "code"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_EMPLOYEE = "employee"; //従業員
+    String JPQL_PARM_REPORT = "report";
+    String JPQL_PARM_PUSH = "pushFlag";
     String JPQL_PARM_FOLLOWING = "following_name";
     String JPQL_PARM_FOLLOWER = "follower_name";
 
@@ -90,8 +93,22 @@ public interface JpaConst {
     String Q_FOLL_FIND_RELATION = ENTITY_FOLL + ".findRelation";
     String Q_FOLL_FIND_RELATION_DEF = "SELECT f FROM Follow AS f WHERE f.following_name = :" + JPQL_PARM_FOLLOWING + " AND f.follower_name = :" + JPQL_PARM_FOLLOWER;
 
+    String Q_IINE_GET_ALL_REPORT = ENTITY_IINE + ".getALLReport";
+    String Q_IINE_GET_ALL_REPORT_DEF = "SELECT i FROM Iine AS i WHERE i.employee = :" + JPQL_PARM_EMPLOYEE + " AND i.report = :" + JPQL_PARM_REPORT;
+
+    String Q_IINE_GET_COUNT_ALL = ENTITY_IINE + ".getCountAll";
+    String Q_IINE_GET_COUNT_ALL_DEF = "SELECT COUNT(i) FROM Iine AS i WHERE i.report = :" + JPQL_PARM_REPORT + " AND i.pushFlag = :" +JPQL_PARM_PUSH;
+
     String TABLE_FOLL = "followers";
     String FOLL_COL_ID = "id";
     String FOLL_COL_FOLLOWING_NAME = "following_name";
     String FOLL_COL_FOLLOWEW_NAME = "follower_name";
+
+    String TABLE_IINE = "iine";
+
+    String IINE_COL_ID = "id";
+    String IINE_COL_EMP = "employee";
+    String IINE_COL_REP = "report";
+
+    String IINE_COL_PUSH_FLAG = "pushFlag";
 }
